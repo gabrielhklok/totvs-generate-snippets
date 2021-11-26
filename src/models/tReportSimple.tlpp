@@ -1,0 +1,89 @@
+#INCLUDE "protheus.ch"
+#INCLUDE "rptdef.ch"
+
+
+User Function ${1:name}()
+    Local aArea As Array
+    Local oReport As Object
+    Local cAlias As Character
+
+    aArea := GetArea()
+
+    If parameterReport()
+        cAlias := GetNextAlias()
+
+        oReport := reportDef(@cAlias)
+        oReport:PrintDialog()
+
+        (cAlias)->(DbCloseArea())
+    EndIf
+
+    RestArea(aArea)
+Return
+
+
+Static Function reportDef(cAlias As Character) As Object
+    Local oPage As Object
+    Local oReport As Object
+    Local oSection As Object
+
+    Local cName As Character
+    Local cTitle As Character
+    Local cDescription As Character
+    Local bParameters As CodeBlock
+    Local bPrint As CodeBlock
+
+    cName := "${1:name}"
+    cTitle := ""
+    cDescription := ""
+    bParameters := {|| parameterReport()}
+    bPrint := {|oReport| reportPrint(oReport, @cAlias)}
+
+    oReport := TReport():New(cName, cTitle, bParameters, bPrint, cDescription)
+
+    oPage := TrPage():New(oReport)
+    oPage:SetPaperSize(DMPAPER_A4)
+
+    oReport:oPage := oPage
+
+    oSection := TrSection():New(oReport, "", cAlias)
+    TrCell():New(oSection, "", cAlias, "", "@!")
+
+Return oReport
+
+
+Static Function reportPrint(oReport As Object, cAlias As Character)
+    Local oSection As Object
+
+    executeQuery(@cAlias)
+
+    If (cAlias)->(Eof())
+        FwAlertError("Nenhum dado encontrado.", "Aviso")
+    Else
+        oSection := oReport:Section(1)
+        oSection:Print()
+    EndIf
+Return
+
+
+Static Function executeQuery(cAlias As Character)
+    BeginSql Alias cAlias
+        SELECT ''
+    EndSql
+Return
+
+
+Static Function parameterReport() As Logical
+    Local aPergs As Array
+    Local bOk As CodeBlock
+
+    bOk := {|| validParameters()}
+
+    aPergs := {}
+    AAdd(aPergs, {1, "", "",,,,, 60, .f.})
+
+Return ParamBox(aPergs, "Parametros",, bOk,, .t.,,,, "${1:name}", .t., .t.)
+
+
+Static Function validParameters() As Logical
+Return .t.
