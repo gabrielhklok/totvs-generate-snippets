@@ -42,6 +42,11 @@ Na sessão [Utilizando os snippets](#Utilizando-os-snippets) exemplificamos essa
 
 Para executar o script em linux use o arquivo **generateLinux.sh**, escrito em shell script.
 
+Navegar até a pasta do script:
+```shellscript
+cd [CAMINHO]/totvs-generate-snippets/src/
+```
+
 Dar permissão de execução:
 
 ```shellscript
@@ -70,6 +75,11 @@ Os snippets gerados são copiados diretamente para a pasta:
 ## Geração do snippet em Windows
 
 Para executar o script em windows use o arquivo **generateWindows.ps1**, escrito em powershell.
+
+Navegar até a pasta do script:
+```powershell
+cd [CAMINHO]/totvs-generate-snippets/src/
+```
 
 Executar:
 
