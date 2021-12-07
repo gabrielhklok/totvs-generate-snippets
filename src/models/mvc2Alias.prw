@@ -21,7 +21,7 @@ Return FwMvcMenu("${1:name}")
 
 Static Function ModelDef()
     Local oStru${2:alias1} := FwFormStruct(1, "${2:alias1}")
-    Local oStru$${3:alias2} := FwFormStruct(1, "$${3:alias2}")
+    Local oStru${3:alias2} := FwFormStruct(1, "${3:alias2}")
     Local oModel := Nil
 
     oModel := MpFormModel():New("")
