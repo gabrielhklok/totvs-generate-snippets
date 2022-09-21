@@ -7,6 +7,7 @@ Script realiza a conversão de código Advpl ou TL++ para um snippet do VSCode.
 1. [Definição](#Definição)
 1. [Criando códigos modelos](#Criando-códigos-modelos)
 1. [Geração do snippet em Linux](#Geração-do-snippet-em-Linux)
+1. [Geração do snippet em MacOS](#Geração-do-snippet-em-MacOS)
 1. [Geração do snippet em Windows](#Geração-do-snippet-em-Windows)
 1. [Utilizando os snippets](#Utilizando-os-snippets)
 
@@ -69,6 +70,40 @@ Os snippets gerados são copiados diretamente para a pasta:
 
 
 `/home/$USER/.config/Code/User/snippets/`
+
+<br />
+
+## Geração do snippet em MacOS
+
+Para executar o script em MacOS use o arquivo **generateMac.zsh**, escrito em shell script.
+
+Navegar até a pasta do script:
+```zsh
+cd [CAMINHO]/totvs-generate-snippets/src/
+```
+
+Dar permissão de execução:
+
+```zsh
+chmod +x generateMac.sh
+```
+
+Executar:
+
+```zsh
+./generateMac.sh
+```
+
+Após executar no console deve aparecer algo parecido com:
+
+![](assets/generated-macos.png)
+
+<br />
+
+Os snippets gerados são copiados diretamente para a pasta:
+
+
+`/Users/$USER/Library/Application Support/Code/User/snippets/`
 
 <br />
 
