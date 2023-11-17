@@ -7,7 +7,7 @@ User Function ${1:name}()
 
     oBrowse := FwMBrowse():New()
     oBrowse:SetAlias("${2:alias}")
-    oBrowse:SetDescription("")
+    oBrowse:SetDescription("${3:description}")
     oBrowse:SetMenuDef("${1:name}")
     oBrowse:ForceQuitButton()
     oBrowse:DisableDetails()
@@ -15,19 +15,23 @@ User Function ${1:name}()
 Return
 
 
+
 Static Function MenuDef()
 Return FwMvcMenu("${1:name}")
+
 
 
 Static Function ModelDef()
     Local oStru${2:alias} := FwFormStruct(1, "${2:alias}")
     Local oModel := Nil
 
-    oModel := MpFormModel():New("")
+    oModel := MpFormModel():New("${1:name}MVC")
     oModel:AddFields("${2:alias}MASTER",, oStru${2:alias})
-    oModel:SetPrimaryKey({})
+    oModel:SetDescription("${3:description}")
     oModel:GetModel("${2:alias}MASTER"):SetDescription("")
+    oModel:SetPrimaryKey({})
 Return oModel
+
 
 
 Static Function ViewDef()
